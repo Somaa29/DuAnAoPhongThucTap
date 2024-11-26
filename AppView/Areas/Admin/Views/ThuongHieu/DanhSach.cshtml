@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AppData.Entities.Models.ThuongHieu>
+
+@{
+    ViewData["Title"] = "DanhSach";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DanhSach</h1>
+
+<p>
+    <a href="~/Admin/ThuongHieu/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenThuongHieu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenThuongHieu)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Update", new { id=item.ID  }) |
+                    @Html.ActionLink("Details", "ThuongHieuDetail", new {  id=item.ID  }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

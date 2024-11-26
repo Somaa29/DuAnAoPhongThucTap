@@ -1,0 +1,107 @@
+﻿@model IEnumerable<AppData.Entities.Models.HoaDon>
+
+@{
+    ViewData["Title"] = "DanhSachHoaDonTheoNguoiDung";
+    Layout = "~/Areas/KhachHang/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/layout/layout.css" rel="stylesheet" asp-append-version="true" />
+<style>
+    .pagination {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .pagination li {
+            margin-right: 5px;
+        }
+
+            .pagination li a {
+                text-decoration: none;
+                padding: 5px 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                background-color: #f9f9f9;
+            }
+
+                .pagination li a.active {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+</style>
+
+
+<table class="table table-bordered" style="width: 1200px;margin: auto;margin-top: 45px;" id="dataTable">
+    <thead>
+        <tr>
+            <th style="display:none;">
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                STT
+            </th>
+            <th>
+                Mã hóa đơn
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="DanhSachHDKH">
+    </tbody>
+</table>
+<div class="row" style="margin-top:1%;">
+    <div class="col-md-6"> </div>
+    <div class="col-md-6">
+        <ul class="pagination" id="pagination"></ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/giohang/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/layout/jquery.min.js"></script>
+<!-- bootstrap 4.1 -->
+<script type="text/javascript" src="~/js/layout/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="~/js/layout/layout.js"></script>
+<script type="text/javascript" src="~/js/hoadon/hoadon.js"></script>
+<script>
+    DanhSachHoaDonTheoNguoiDungKH();
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdownToggle = document.querySelector('.dropdown-toggle');
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+
+        // Function to toggle dropdown menu visibility
+        function toggleDropdown() {
+            dropdownMenu.classList.toggle('show');
+        }
+
+        // Event listener to toggle dropdown menu visibility on button click
+        dropdownToggle.addEventListener('click', function () {
+            toggleDropdown();
+        });
+
+        // Event listener to hide dropdown menu when clicking outside of it
+        document.addEventListener('click', function (event) {
+            var targetElement = event.target;
+            if (!targetElement.matches('.dropdown-toggle')) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,168 @@
+﻿@model IEnumerable<AppData.Entities.Models.Sale>
+
+@{
+    ViewData["Title"] = "DanhSach";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link href="~/css/layout/adminlte.min.css" rel="stylesheet" />
+<link href="~/css/layout/fontawesome/all.min.css" rel="stylesheet" />
+
+
+<style>
+    .badge-error {
+        color: #fff;
+        background-color: #dd4444;
+    }
+
+    a:hover {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+<a class="btn btn-primary" href="~/Admin/Sale/Create" style="margin:10px">Thêm Sale mới</a>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh sách Sale</h1>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<form action="~/Admin/Sale/DanhSach" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+        </div>
+        </div>
+        @*Lọc theo trạng thái*@
+@*        <div class="col-md-4">
+            <div class="row">
+                <label class="control-label col-md-4">Trạng thái: </label>
+                <div class="col-md-8">
+                    <select id="TrangThai" name="TrangThai" class="form-control">
+                        <option value="">All</option>
+                        <option value="0">Không hoạt động</option>
+                        <option value="1">Hoạt động</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</form>
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"></h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th style="width:10%">
+                        Mã Sale
+                    </th>
+                    <th style="width:10%">
+                        Ngày Bắt Đầu
+                    </th>
+                    <th style="width:10%">
+                        Ngày Kết Thúc
+                    </th>
+                    <th style="width:10%">
+                        Phần Trăm Giảm
+                    </th>
+                    <th style="width:10%" class="text-center">
+                        Trạng thái
+                    </th>
+                    <th style="width:10%">
+                    </th>
+                    <th style="width:10%">
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="table-user">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.ActionLink(item.MaSale, "Detail", new { Id = @item.ID})
+                        </td>
+                        <td>
+                            @item.NgayBatDau
+                        </td>
+                        <td>
+                            @item.NgayKetThuc
+                        </td>
+                        <td>
+                            @item.PhanTramGiam %
+                        </td>
+                        <td class="project-state">
+                            @if (item.TrangThai == 1)
+                            {
+                                <span class="badge badge-success">Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-error">Không hoạt động</span>
+                            }
+
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"> </i>
+                                @Html.ActionLink("Delete", "Delete", new { Id = @item.ID})
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fas fa-edit"></i>
+                                @Html.ActionLink("Edit", "Edit", new { Id = @item.ID})
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+<script src="~/js/nguoidung/qlnguoidung.js"></script>
+<script src="~/js/layout/jquery.min.js"></script>
+<script src="~/js/layout/bootstrap.bundle.min.js"></script>
+<script src="~/js/layout/adminlte.js"></script>
+
+<script > 
+    // Truyền ngày
+    document.getElementById("NgayKetThuc").addEventListener("change", function () {
+        var selectedDate = this.value;
+        console.log(selectedDate);
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/SaleChiTiet/NhanNgay',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(selectedDate),
+            success: function (result) {
+                console.log(selectedDate);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
+
+

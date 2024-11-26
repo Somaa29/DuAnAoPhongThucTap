@@ -1,0 +1,219 @@
+﻿@using AppData.Entities.Models;
+@model AppData.Entities.Models.Sale
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link href="~/css/layout/adminlte.min.css" rel="stylesheet" />
+<link href="~/css/layout/fontawesome/all.min.css" rel="stylesheet" />
+
+<h1>Detail</h1>
+<div>
+    <h4>Sale</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaSale)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaSale)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayBatDau)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayKetThuc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhanTramGiam)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhanTramGiam)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    <a asp-action="DanhSach">Back to List</a>
+</div>
+
+@{
+    var list = ViewBag.spct as List<SanPhamChiTiet>;
+    if (list != null)
+    {
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Màu sắc</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Thương Hiệu</th>
+                    <th scope="col">Số Lượng</th>
+                    <th scope="col">Giá bán</th>
+                    <th scope="col">Loại sản phẩm</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (SanPhamChiTiet item in list)
+                    {
+
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@item.MaSPCT</td>
+                            <td>@item.SanPham.TenSanPham</td>
+                            <td>@item.MauSac.TenMauSac</td>
+                            <td>@item.Size.SizeNumber</td>
+                            <td>@item.ThuongHieu.TenThuongHieu</td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.GiaBan</td>
+                            <td>@item.LoaiSanPham</td>
+                            <td>@item.MoTa</td>
+                            <td>@item.TrangThai</td>
+                            <td>
+                            <button class="btn btn-primary btn-create"  IDSPCT="@item.ID" IDSALE="@ViewBag.idsl">
+
+                                Thêm vào khuyến mãi
+                            </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    }
+
+}
+@{
+    var list2 = ViewBag.spct2 as List<SanPhamChiTiet>;
+    if (list2 != null)
+    {
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Màu sắc</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Thương Hiệu</th>
+                    <th scope="col">Số Lượng</th>
+                    <th scope="col">Giá bán</th>
+                    <th scope="col">Loại sản phẩm</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (SanPhamChiTiet item in list2)
+                    {
+
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@item.MaSPCT</td>
+                            <td>@item.SanPham.TenSanPham</td>
+                            <td>@item.MauSac.TenMauSac</td>
+                            <td>@item.Size.SizeNumber</td>
+                            <td>@item.ThuongHieu.TenThuongHieu</td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.GiaBan</td>
+                            <td>@item.LoaiSanPham</td>
+                            <td>@item.MoTa</td>
+                            <td>@item.TrangThai</td>
+                            <td>
+                            <button class="btn btn-primary btn-delete" IDSPCT="@item.ID" IDSALE="@ViewBag.idsl">
+                                Xóa sản phẩm
+                            </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    }
+
+}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $('.btn-create').click(function(){
+        var idSale = $(this).attr('IDSALE');
+        var idSpct = $(this).attr('IDSPCT'); 
+            $.ajax({
+                url: '/Admin/Sale/AddSlct',  
+                type: 'GET',  
+                data: {
+                    idSale: idSale,
+                    idSpct: idSpct
+                },
+                success: function (response) {
+                if (response.success) {
+                        window.location.reload();
+                    } else {
+                    }
+                },
+                error: function (error) {
+                }
+            });
+
+    })
+
+    $('.btn-delete').click(function () {
+        var idSale = $(this).attr('IDSALE');
+        var idSpct = $(this).attr('IDSPCT');
+        $.ajax({
+            url: '/Admin/Sale/DeleteSlct',
+            type: 'GET',
+            data: {
+                idSale: idSale,
+                idSpct: idSpct
+            },
+            success: function (response) {
+                if (response.success) {
+                    window.location.reload();
+                } else {
+                }
+            },
+            error: function (error) {
+            }
+        });
+
+    })
+</script>
+<script src="~/js/nguoidung/qlnguoidung.js"></script>
+<script src="~/js/layout/jquery.min.js"></script>
+<script src="~/js/layout/bootstrap.bundle.min.js"></script>
+<script src="~/js/layout/adminlte.js"></script>
+

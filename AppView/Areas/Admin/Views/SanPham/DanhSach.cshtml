@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AppData.Entities.Models.SanPham>
+
+@{
+    ViewData["Title"] = "DanhSach";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DanhSach</h1>
+
+<p>
+    <a href="~/Admin/SanPham/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th style="display:none;">
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSanPham)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KhoiLuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="display:none;">
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KhoiLuong)
+                </td>
+                <td>
+                    @if (item.TrangThai == 1)
+                    {
+                        <span>Còn hàng</span>
+                    }
+                    else
+                    {
+                        <span>Hết hàng</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Update", new {  id=item.ID  }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID})
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
